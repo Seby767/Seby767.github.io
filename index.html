@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUPHORIA - Lista Eventi</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B026FF',secondary:'#9D4EDD'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Montserrat', sans-serif;
+background-color: #000000;
+color: #ffffff;
+}
+.glow-text {
+text-shadow: 0 0 10px rgba(176, 38, 255, 0.7), 0 0 20px rgba(176, 38, 255, 0.5);
+}
+.glow-border {
+box-shadow: 0 0 10px rgba(176, 38, 255, 0.5), 0 0 20px rgba(176, 38, 255, 0.3);
+}
+.neon-button {
+position: relative;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.neon-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 0 15px rgba(176, 38, 255, 0.7), 0 0 30px rgba(176, 38, 255, 0.4);
+}
+.glassmorphism {
+background: rgba(10, 10, 10, 0.7);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+.menu-slide {
+transform: translateX(-100%);
+transition: transform 0.3s ease-in-out;
+}
+.menu-slide.active {
+transform: translateX(0);
+}
+.fade-in {
+animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.card-hover {
+transition: all 0.3s ease;
+}
+.card-hover:hover {
+transform: translateY(-5px);
+box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
+}
+.content-area {
+padding-top: 64px;
+padding-bottom: 64px;
+}
+/* Stile Neon per EUPHORIA Logo */
+.neon-logo {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow: 
+        0 0 2px #B026FF,
+        0 0 4px #B026FF,
+        0 0 8px #B026FF,
+        0 0 15px #B026FF;
+    background: linear-gradient(45deg, #B026FF, #FF00FF, #00FFFF, #B026FF, #9D4EDD);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: neonPulse s ease-in-out infinite alternate, gradientFlow 2s ease-in-out infinite;
+    position: relative;
+    display: inline-block;
+}
+
+.neon-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(176, 38, 255, 0.1) 0%, transparent 50%);
+    border-radius: 40%;
+    animation: glowPulse 1s ease-in-out infinite alternate;
+    z-index: -2;
+}
+
+@keyframes neonPulse {
+    from {
+        text-shadow: 
+            0 0 2px #B026FF,
+            0 0 4px #B026FF,
+            0 0 8px #B026FF,
+            0 0 15px #B026FF;
+    }
+    to {
+        text-shadow: 
+            0 0 4px #B026FF,
+            0 0 8px #B026FF,
+            0 0 12px #B026FF,
+            0 0 20px #B026FF,
+            0 0 28px #B026FF;
+    }
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glowPulse {
+    from {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+}
+
+.neon-logo:hover {
+    animation: neonPulse 0.5s ease-in-out infinite alternate, gradientFlow 2s ease-in-out infinite;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+</style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 w-full z-50 glassmorphism border-b border-primary/30">
+<div class="flex items-center justify-between px-4 py-1">
+<button id="menuToggle" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+<div class="text-center">
+<h3 class="neon-logo text-2xl mb-10 text-center" data-text="EUPHORIA">EUPHORIA</h3>
+</div>
+<div class="w-8 h-8 flex items-center justify-center">
+<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-instagram-line ri-lg"></i>
+</a>
+</div>
+</div>
+</nav>
+<!-- Slide Menu -->
+<div id="slideMenu" class="fixed top-0 left-0 h-full w-64 bg-black/95 z-50 menu-slide border-r border-primary/30">
+<div class="p-6">
+<div class="flex justify-end mb-6">
+<button id="closeMenu" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<h3 class="neon-logo text-2xl mb-10 text-center" data-text="EUPHORIA">EUPHORIA</h3>
+<ul class="space-y-6">
+<li><a href="#prenota" class="block text-white hover:text-primary transition-colors py-2 border-b border-white/10">Prenota</a></li>
+<li><a href="#diventa-pr" class="block text-white hover:text-primary transition-colors py-2 border-b border-white/10">Diventa PR</a></li>
+<li><a href="#info" class="block text-white hover:text-primary transition-colors py-2 border-b border-white/10">Info/Contatti</a></li>
+</ul>
+<div class="mt-10 pt-6 border-t border-white/10">
+<div class="flex space-x-4 justify-center">
+<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-colors cursor-pointer">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="https://wa.me/3519205069" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-colors cursor-pointer">
+<i class="ri-whatsapp-line"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img src="https://readdy.ai/api/search-image?query=Nightclub%20atmosphere%20with%20purple%20neon%20lights%2C%20elegant%20crowd%2C%20high-end%20party%20ambiance%2C%20dark%20moody%20lighting%2C%20luxury%20nightlife%2C%20vibrant%20dance%20floor%2C%20premium%20bottles%20service%2C%20exclusive%20VIP%20area%2C%20stylish%20young%20people%20enjoying%20nightlife%2C%20cinematic%20composition%2C%20high-quality%20professional%20photography&width=375&height=762&seq=hero1&orientation=portrait" alt="EUPHORIA Nightlife" class="w-full h-full object-cover object-center">
+<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black"></div>
+</div>
+<div class="relative z-10 text-center px-6 fade-in">
+<h1 class="text-5xl mb-4 text-center" style="font-family: 'Arial Black', Arial, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; text-shadow: 0 0 1px #B026FF, 0 0 2px #B026FF, 0 0 4px #B026FF, 0 0 8px #B026FF; background: linear-gradient(45deg, #B026FF, #FF00FF, #00FFFF, #B026FF, #9D4EDD); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientFlow 3s ease-in-out infinite;">EUPHORIA LIST</h1>
+<p class="text-white/90 mb-8 text-lg max-w-xs mx-auto">Vuoi unirti al tavolo oppure organizzare un tavolo tutto tuo con i tuoi amici? Feste, Eventi, Compleanni...  Ci pensiamo noi!</p>
+<a href="#prenota" class="neon-button inline-block bg-primary text-white px-8 py-3 rounded-button text-lg font-medium">Prenota Ora</a>
+</div>
+</section>
+<!-- Prenota Section -->
+<section id="prenota" class="py-16 px-6 content-area">
+<div class="max-w-md mx-auto">
+<h2 class="text-3xl font-bold text-center mb-2 text-primary glow-text">Prenota</h2>
+<p class="text-white/80 text-center mb-8">Vuoi un tavolo esclusivo per compleanno, oppure unirti a un tavolo già esistente?</p>
+<div class="bg-black border border-primary/50 rounded-lg p-6 glow-border card-hover">
+<div class="mb-6">
+<img src="https://readdy.ai/api/search-image?query=Luxury%20VIP%20table%20at%20nightclub%20with%20purple%20lighting%2C%20champagne%20bottles%20with%20sparklers%2C%20elegant%20setup%2C%20premium%20bottle%20service%2C%20exclusive%20nightlife%20experience%2C%20high-end%20party%20atmosphere%2C%20velvet%20ropes%2C%20cinematic%20mood%2C%20high-quality%20professional%20photography&width=375&height=200&seq=prenota1&orientation=landscape" alt="VIP Table" class="w-full h-48 object-cover object-center rounded-lg mb-4">
+<h3 class="text-xl font-semibold mb-2">Tavolo</h3>
+<p class="text-white/70">Sei da solo? in coppia o un gruppo numeroso? Vuoi il tavolo? 
+    Ho la soluzione per te! Prenota il tuo tavolo e goditi una serata con i tuoi amici.</p>
+</p>
+</div>
+<a href="https://wa.me/3519205069" target="_blank" class="neon-button flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button">
+<i class="ri-whatsapp-fill ri-lg mr-2"></i>
+Prenota il tuo tavolo!
+</a>
+</div>
+</div>
+</section>
+<!-- Diventa PR Section -->
+<section id="diventa-pr" class="py-16 px-6 bg-black/50 content-area">
+<div class="max-w-md mx-auto">
+<h2 class="text-3xl font-bold text-center mb-2 text-primary glow-text">Diventa PR</h2>
+<p class="text-white/80 text-center mb-8">Ti piace fare serata, conosci persone e vuoi sconti esclusivi o ingressi omaggio? Che aspetti, contattaci!</p>
+<div class="bg-black border border-primary/50 rounded-lg p-6 glow-border card-hover">
+<div class="mb-6">
+<img src="https://readdy.ai/api/search-image?query=Stylish%20PR%20manager%20at%20nightclub%20entrance%20with%20clipboard%2C%20VIP%20list%2C%20well-dressed%2C%20professional%20appearance%2C%20greeting%20guests%2C%20purple%20ambient%20lighting%2C%20exclusive%20nightlife%20atmosphere%2C%20high-end%20event%20management%2C%20cinematic%20composition%2C%20high-quality%20professional%20photography&width=375&height=200&seq=pr1&orientation=landscape" alt="Diventa PR" class="w-full h-48 object-cover object-center rounded-lg mb-4">
+<h3 class="text-xl font-semibold mb-2">Public Relation</h3>
+<p class="text-white/70">Cerchiamo persone dinamiche e socievoli che riescano a invitare persone al nostro tavolo. Guadagna commissioni e ottieni sconti esclusivi.</p>
+</div>
+<a href="https://wa.me/3519205069?text=Ciao%20Sebah%2C%20sarei%20interessato%20a%20fare%20il%20PR" target="_blank" class="neon-button flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-button">
+<i class="ri-user-add-line ri-lg mr-2"></i>
+Diventa PR!
+</a>
+</div>
+</div>
+</section>
+<!-- Info/Contatti Section -->
+<section id="info" class="py-16 px-6 content-area">
+<div class="max-w-md mx-auto">
+<h2 class="text-3xl font-bold text-center mb-2 text-primary glow-text">Info & Contatti</h2>
+<p class="text-white/80 text-center mb-8">Informazioni che possono tornare utili</p>
+<div class="space-y-6">
+<!-- Card 1: Info principali -->
+<div class="bg-black border border-primary/50 rounded-lg p-6 glow-border card-hover">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-full mb-4 mx-auto">
+<i class="ri-map-pin-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2 text-center">Dov'è il Setai?</h3>
+<p class="text-white/70 text-center mb-4">Località, Via Portico, 21, 24050 Orio al Serio (BG)</p>
+<a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x478150479038cbe3:0x48a7e8ae7b81b010?sa=X&ved=1t:8290&ictx=111" target="_blank" class="flex items-center justify-center w-full bg-primary/20 hover:bg-primary/30 text-white py-2 px-4 rounded-button transition-colors">
+<i class="ri-map-2-line ri-lg mr-2"></i>
+Apri in Maps
+</a>
+</div>
+<!-- Card 2: Orari -->
+<div class="bg-black border border-primary/50 rounded-lg p-6 glow-border card-hover">
+    <div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-full mb-4 mx-auto">
+        <i class="ri-time-line ri-xl text-primary"></i>
+    </div>
+    <h3 class="text-xl font-semibold mb-2 text-center">Orari Setai</h3>
+    <ul class="space-y-2 text-white/70">
+        <li class="flex justify-between">
+            <span>Lunedì - Giovedì</span>
+            <span>Chiuso</span>
+        </li>
+        <li class="flex justify-between">
+            <span>Venerdì</span>
+            <span>23:30 - 4:00</span>
+        </li>
+        <li class="flex justify-between">
+            <span>Sabato</span>
+            <span>23:30 - 4:00</span>
+        </li>
+        <li class="flex justify-between">
+            <span>Domenica</span>
+            <span>Chiuso</span>
+        </li>
+    </ul>
+</div>
+<!-- Card 3: Contatti -->
+<div class="bg-black border border-primary/50 rounded-lg p-6 glow-border card-hover">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-full mb-4 mx-auto">
+<i class="ri-contacts-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2 text-center">Contattaci per Info</h3>
+<ul class="space-y-4">
+<li class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center mr-3">
+<i class="ri-whatsapp-line ri-lg text-primary"></i>
+</div>
+<a href="https://wa.me/3519205069" class="text-white/70 hover:text-white">+39 351 920 5069</a>
+</li>
+<li class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center mr-3">
+<i class="ri-instagram-line ri-lg text-primary"></i>
+</div>
+<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="text-white/70 hover:text-white">@euphoria_list</a>
+</li>
+<li class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center mr-3">
+<i class="ri-mail-line ri-lg text-primary"></i>
+</div>
+<a href="mailto:seby767r@gmail.com" class="text-white/70 hover:text-white">seby767r@gmail.com</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="py-8 px-6 border-t border-primary/30">
+<div class="max-w-md mx-auto">
+<div class="flex justify-center space-x-6 mb-6">
+<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-colors cursor-pointer">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="https://wa.me/3519205069" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-colors cursor-pointer">
+<i class="ri-whatsapp-line"></i>
+</a>
+<a href="mailto:seby767r@gmail.com" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-colors cursor-pointer">
+<i class="ri-mail-line"></i>
+</a>
+</div>
+<p class="text-white/50 text-center text-sm mb-4">© 2025 EUPHORIA. Tutti i diritti riservati.</p>
+<div class="flex justify-center space-x-4 text-xs text-white/40">
+<a href="#" class="hover:text-white/70">Privacy Policy</a>
+<a href="#" class="hover:text-white/70">Termini di Servizio</a>
+</div>
+</div>
+</footer>
+<!-- Back to top button -->
+<button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 flex items-center justify-center bg-primary rounded-full shadow-lg opacity-0 invisible transition-all duration-300 cursor-pointer neon-button">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<script id="menuToggleScript">
+document.addEventListener('DOMContentLoaded', function() {
+const menuToggle = document.getElementById('menuToggle');
+const closeMenu = document.getElementById('closeMenu');
+const slideMenu = document.getElementById('slideMenu');
+menuToggle.addEventListener('click', function() {
+slideMenu.classList.add('active');
+});
+closeMenu.addEventListener('click', function() {
+slideMenu.classList.remove('active');
+});
+// Close menu when clicking on menu items
+const menuLinks = slideMenu.querySelectorAll('a');
+menuLinks.forEach(link => {
+link.addEventListener('click', function() {
+slideMenu.classList.remove('active');
+});
+});
+});
+</script>
+<script id="scrollScript">
+document.addEventListener('DOMContentLoaded', function() {
+const backToTopButton = document.getElementById('backToTop');
+// Show/hide back to top button based on scroll position
+window.addEventListener('scroll', function() {
+if (window.scrollY > 300) {
+backToTopButton.classList.remove('opacity-0', 'invisible');
+backToTopButton.classList.add('opacity-100', 'visible');
+} else {
+backToTopButton.classList.remove('opacity-100', 'visible');
+backToTopButton.classList.add('opacity-0', 'invisible');
+}
+});
+// Scroll to top when button is clicked
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 70, // Adjust for navbar height
+behavior: 'smooth'
+});
+}
+});
+});
+});
+</script>
+<script id="animationScript">
+document.addEventListener('DOMContentLoaded', function() {
+// Fade in elements on scroll
+const fadeElements = document.querySelectorAll('.card-hover');
+const fadeInOnScroll = function() {
+fadeElements.forEach(element => {
+const elementTop = element.getBoundingClientRect().top;
+const elementVisible = 150;
+if (elementTop < window.innerHeight - elementVisible) {
+element.classList.add('fade-in');
+}
+});
+};
+window.addEventListener('scroll', fadeInOnScroll);
+fadeInOnScroll(); // Check on initial load
+});
+</script>
+</body>
+</html>
