@@ -72,8 +72,8 @@ padding-bottom: 64px;
     text-shadow: 
         0 0 2px #B026FF,
         0 0 4px #B026FF,
-        0 0 8px #B026FF,
-        0 0 15px #B026FF;
+        0 0 6px #B026FF,
+        0 0 10px #B026FF;
     background: linear-gradient(45deg, #B026FF, #FF00FF, #00FFFF, #B026FF, #9D4EDD);
     background-size: 200% 200%;
     -webkit-background-clip: text;
@@ -87,14 +87,14 @@ padding-bottom: 64px;
 .neon-logo::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(176, 38, 255, 0.1) 0%, transparent 50%);
-    border-radius: 40%;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: radial-gradient(circle at center, rgba(176, 38, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
     animation: glowPulse 2s ease-in-out infinite alternate;
-    z-index: -2;
+    z-index: -1;
 }
 
 @keyframes neonPulse {
@@ -102,16 +102,18 @@ padding-bottom: 64px;
         text-shadow: 
             0 0 2px #B026FF,
             0 0 4px #B026FF,
-            0 0 8px #B026FF,
-            0 0 15px #B026FF;
+            0 0 6px #B026FF,
+            0 0 10px #B026FF;
+        transform: scale(1);
     }
     to {
         text-shadow: 
             0 0 4px #B026FF,
             0 0 8px #B026FF,
             0 0 12px #B026FF,
-            0 0 20px #B026FF,
-            0 0 28px #B026FF;
+            0 0 16px #B026FF,
+            0 0 20px #B026FF;
+        transform: scale(1.02);
     }
 }
 
@@ -134,24 +136,22 @@ padding-bottom: 64px;
 
 .neon-logo:hover {
     animation: neonPulse 0.8s ease-in-out infinite alternate, gradientFlow 1s ease-in-out infinite;
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
 }
 </style>
 </head>
 <body>
 <!-- Navbar -->
 <nav class="fixed top-0 left-0 w-full z-50 glassmorphism border-b border-primary/30">
-<div class="flex items-center justify-between px-4 py-1">
-<button id="menuToggle" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
-<i class="ri-menu-line ri-lg"></i>
+<div class="flex items-center justify-between px-4 py-3">
+<button id="menuToggle" class="w-10 h-10 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-menu-line ri-xl"></i>
 </button>
 <div class="text-center">
-<h3 class="neon-logo text-2xl text-center" data-text="EUPHORIA">EUPHORIA</h3>
+<h3 class="neon-logo text-3xl text-center" data-text="EUPHORIA">EUPHORIA</h3>
 </div>
-<div class="w-8 h-8 flex items-center justify-center">
-<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
-<i class="ri-instagram-line ri-lg"></i>
+<div class="w-10 h-10 flex items-center justify-center">
+<a href="https://www.instagram.com/euphoria_list/" target="_blank" class="w-10 h-10 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-instagram-line ri-xl"></i>
 </a>
 </div>
 </div>
